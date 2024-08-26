@@ -9,9 +9,9 @@ df_one = conn_one.read()
 
 
 # Create a connection object for the second spreadsheet
-conn_two = st.connection("gsheets2", type=GSheetsConnection)
-df_two = conn_two.read()
+#conn_two = st.connection("gsheets2", type=GSheetsConnection)
+#df_two = conn_two.read()
 st.header('df1')
 st.dataframe(df_one)
-st.header('df2')
-st.dataframe(df_two)
+#st.header('df2')
+#st.dataframe(df_two)
