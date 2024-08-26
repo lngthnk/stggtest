@@ -4,7 +4,7 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 
 # Create a connection object for the first spreadsheet
-conn_one = st.connection("gsheets1", type=GSheetsConnection)
+conn_one = st.connection("gsheets", type=GSheetsConnection)
 df_one = conn_one.read()
 
 
