@@ -191,7 +191,7 @@ conn_list = st.connection("list", type=GSheetsConnection)
 df_list = conn_list.read()
 list_col = df_list.iloc[0].to_list()
 df_list = df_list.iloc[1:]
-df_list.set_axis(list_col, axis = 1)
+df_list = df_list.set_axis(list_col, axis = 1)
 
 
 st.dataframe(df_price.tail())
