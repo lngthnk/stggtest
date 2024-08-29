@@ -212,9 +212,10 @@ with st.form("Daily Download"):
     daily_submitted = st.form_submit_button(label = 'Download daily data')
 if daily_submitted:
     daily = download_all(df_price, df_TRI)
-
-    st.dataframe(daily[0])
-    st.dataframe(daily[1])
+    price_data = daily[0]
+    TRI_data = daily[1]
+    st.dataframe(price_data)
+    st.dataframe(TRI_data)
 #trouble shooting
 
 
