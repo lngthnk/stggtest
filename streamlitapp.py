@@ -216,7 +216,6 @@ if daily_submitted:
     except:
         st.write('Please Reboot')
     new_price = download_pricedata(df_price)
-    daily = download_all(df_price, df_TRI)
     st.dataframe(new_price)
     st.dataframe(new_TRI)
 #trouble shooting
