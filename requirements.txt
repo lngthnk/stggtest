@@ -5,3 +5,6 @@ plotly
 scipy
 datetime
 st-gsheets-connection
+selenium
+webdriver-manager
+yfinance
