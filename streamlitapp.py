@@ -181,22 +181,26 @@ driver = get_driver()
 conn_price = st.connection("Price", type=GSheetsConnection)
 df_price = conn_price.read()
 df_price = df_price.set_index('Date')
+price_date = df_price.index[-1]
 
 conn_TRI = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn_TRI.read()
 df_TRI = df_TRI.set_index('DATE')
+TRI_date = df_TRI.index[-1]
 
 
 conn_list = st.connection("list", type=GSheetsConnection)
 df_list = conn_list.read()
 list_col = df_list.iloc[0].to_list()
-df_list = df_list.iloc[1:]
-df_list = df_list.set_axis(list_col, axis = 1)
+df_list2 = df_list.iloc[1:].copy()
+df_list2 = df_list2.set_axis(list_col, axis = 1)
+symbol_list = df_list2['Symbol'].to_list()
+
+st.write(f" last Price date {price_date}")
+st.write(f"last TRI Date {TRI_date}")
+st.write(f"number of ticker {len(symbol_list)}")
 
 
-st.dataframe(df_price.tail())
-st.dataframe(df_TRI.tail())
-st.dataframe(df_list.tail())
 #show last updated date
 
 
