@@ -200,20 +200,21 @@ symbol_list = df_list2['Symbol'].to_list()
 price_date = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = price_date.strftime('%d/%m/%Y')
 
-
-st.write(f" last Price date {price_date}")
-st.write(f"last TRI Date {TRI_date}")
-st.write(f"number of ticker {len(symbol_list)}")
-
-
 #show last updated date
-
-
+st.write(f"Last Price Date {price_date}")
+st.write(f"Last TRI Date {TRI_date}")
+st.write(f"Number of ticker {len(symbol_list)}")
 
 #button download new price/ data 
+#daily donwload
+st.subheader('Daily download')
+with st.form("Daily Download"):
+    daily_submitted = st.form_submit_button(label = 'Download daily data')
+if daily_submitted:
+    daily = download_all(df_price, df_TRI)
 
-
-
+    st.dataframe(daily[0])
+    st.dataframe(daily[1])
 #trouble shooting
 
 
@@ -227,7 +228,7 @@ st.write(f"number of ticker {len(symbol_list)}")
 
 
 
-st.subheader('download new price')
+
 
 
 #with st.form("choose"):
