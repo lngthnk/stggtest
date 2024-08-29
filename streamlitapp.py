@@ -180,11 +180,11 @@ options.add_argument("--headless")
 driver = get_driver()
 conn_price = st.connection("Price", type=GSheetsConnection)
 df_price = conn_price.read()
-df_price = df_price.set_index('DATE')
+df_price = df_price.set_index('Date')
 
 conn_TRI = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn_TRI.read()
-df_TRI = df_TRI.set_index('Date')
+df_TRI = df_TRI.set_index('DATE')
 
 
 conn_list = st.connection("list", type=GSheetsConnection)
@@ -221,13 +221,13 @@ st.dataframe(df_list.tail())
 st.subheader('download new price')
 
 
-with st.form("choose"):
-    option = st.selectbox("What file to download?", ("Price", "TRI", "add new ticker to price"))
-    submitted = st.form_submit_button(label = 'get data')
+#with st.form("choose"):
+    #option = st.selectbox("What file to download?", ("Price", "TRI", "add new ticker to price"))
+    #submitted = st.form_submit_button(label = 'get data')
 
-if submitted:
-    on_click=select_option(option, tri_df = SET50_data, price_df=price_data, ticker_list=Ticker_list)
-    st.toast('Get data complete', icon = '🎉')
+#if submitted:
+    #on_click=select_option(option, tri_df = SET50_data, price_df=price_data, ticker_list=Ticker_list)
+    #st.toast('Get data complete', icon = '🎉')
 
 
 
