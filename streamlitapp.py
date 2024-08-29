@@ -211,9 +211,14 @@ st.subheader('Daily download')
 with st.form("Daily Download"):
     daily_submitted = st.form_submit_button(label = 'Download daily data')
 if daily_submitted:
+    try:
+        new_TRI = dl_set50(df_TRI)
+    except:
+        st.write('Please Reboot')
+    new_price = download_pricedata(df_price)
     daily = download_all(df_price, df_TRI)
-    st.dataframe(daily['Price'])
-    st.dataframe(daily['TRI'])
+    st.dataframe(new_price)
+    st.dataframe(new_TRI)
 #trouble shooting
 
 
