@@ -196,6 +196,11 @@ df_list2 = df_list.iloc[1:].copy()
 df_list2 = df_list2.set_axis(list_col, axis = 1)
 symbol_list = df_list2['Symbol'].to_list()
 
+
+price_date = datetime.strptime(price_date, '%Y-%m-%d')
+price_date = price_date.strftime('%d/%m/%Y')
+
+
 st.write(f" last Price date {price_date}")
 st.write(f"last TRI Date {TRI_date}")
 st.write(f"number of ticker {len(symbol_list)}")
