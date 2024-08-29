@@ -147,7 +147,7 @@ def download_all(price_df, tri_df):
         new_price_data = download_pricedata(price_df)
         st.dataframe(df_tri)
         st.dataframe(new_price_data)    
-    return [df_tri, new_price_data]
+    return {'Price':new_price_data, 'TRI': df_tri}
 
 
 def select_option(option, tri_df, price_df, ticker_list):
@@ -212,10 +212,8 @@ with st.form("Daily Download"):
     daily_submitted = st.form_submit_button(label = 'Download daily data')
 if daily_submitted:
     daily = download_all(df_price, df_TRI)
-    price_data = daily[0]
-    TRI_data = daily[1]
-    st.dataframe(price_data)
-    st.dataframe(TRI_data)
+    st.dataframe(daily['Price'])
+    st.dataframe(daily['TRI'])
 #trouble shooting
 
 
