@@ -227,10 +227,11 @@ if daily_submitted:
 conn_test = st.connection("test", type=GSheetsConnection)
 df_test = conn_test.read()
 st.dataframe(df_test)
-df_test.iloc[1]['a'] = 25
+new = ['6/5/2024', 3, 0]
+df_test.loc[len(df_test)] = new
 st.dataframe(df_test)
 if st.button("Update worksheet"):
-    df = conn.update(
+    df = conn_test.update(
         data=df_test,
     )
 
