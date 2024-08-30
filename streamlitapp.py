@@ -226,7 +226,13 @@ if daily_submitted:
 #trouble shooting
 conn_test = st.connection("test", type=GSheetsConnection)
 df_test = conn_test.read()
-
+st.dataframe(df_test)
+df_test.iloc[1]['a'] = 25
+st.dataframe(df_test)
+if st.button("Update worksheet"):
+    df = conn.update(
+        data=df_test,
+    )
 
 #separate download
 
