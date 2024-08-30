@@ -207,7 +207,7 @@ st.write(f"Number of ticker {len(symbol_list)}")
 
 #button download new price/ data 
 #daily donwload
-st.subheader('Daily download')
+st.subheader("Daily download")
 with st.form("Daily Download"):
     daily_submitted = st.form_submit_button(label = 'Download daily data')
 if daily_submitted:
@@ -217,8 +217,15 @@ if daily_submitted:
     new_price = download_pricedata(df_price)
     st.dataframe(new_price)
     st.dataframe(new_TRI)
-#trouble shooting
+    with st.form('update data'):
+        update_button = st.form_submit_button('label = Update Data')
+    if update_button:
+        st.write('update')
+        conn_price.update()
 
+#trouble shooting
+conn_test = st.connection("test", type=GSheetsConnection)
+df_test = conn_test.read()
 
 
 #separate download
