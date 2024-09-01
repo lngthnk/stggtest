@@ -217,11 +217,10 @@ if daily_submitted:
     new_price = download_pricedata(df_price)
     st.dataframe(new_price)
     st.dataframe(new_TRI)
-    with st.form('update data'):
-        update_button = st.form_submit_button('label = Update Data')
-    if update_button:
-        st.write('update')
-        conn_price.update()
+    if st.button('update data'):
+        df1 = conn_price.update(data=new_price)
+        df2 = conn_TRI.update(data=new_price)
+
 
 #trouble shooting
 conn_test = st.connection("test", type=GSheetsConnection)
