@@ -212,9 +212,9 @@ st.write(f"Number of ticker {len(symbol_list)}")
 #new_TRI = dl_set50(df_TRI)
 
 #new_price = download_pricedata(df_price)
-new = ['6/5/2024', 3, 0]
+new = [3, 0]
 new_TRI = df_TRI.copy()
-new_TRI.loc[len(new_TRI)] = new
+new_TRI.loc['1/9/2024'] = new
 #st.dataframe(new_price.tail())
 st.dataframe(new_TRI.tail())
 df2 = conn_TRI.update(data =new_TRI,)
