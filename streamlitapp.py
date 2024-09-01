@@ -209,13 +209,15 @@ st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 st.write(f"Number of ticker {len(symbol_list)}")
 
-new_TRI = dl_set50(df_TRI)
+#new_TRI = dl_set50(df_TRI)
 
-new_price = download_pricedata(df_price)
-
-st.dataframe(new_price.tail())
+#new_price = download_pricedata(df_price)
+new = ['6/5/2024', 3, 0]
+new_TRI = df_TRI.copy()
+new_TRI.loc[len(new_TRI)] = new
+#st.dataframe(new_price.tail())
 st.dataframe(new_TRI.tail())
-
+df2 = conn_TRI.update(data =new_TRI,)
 
 
 #button download new price/ data 
@@ -225,18 +227,15 @@ st.subheader("Daily download")
 #    daily_submitted = st.form_submit_button(label = 'Download daily data')
 if st.button('Daily Update'):
 
-    new_TRI = dl_set50(df_TRI)
+    #new_TRI = dl_set50(df_TRI)
 
-    new_price = download_pricedata(df_price)
+    #new_price = download_pricedata(df_price)
 
-    st.dataframe(new_price.tail())
-    st.dataframe(new_TRI.tail())
-    df1 = conn_price.update(
-        data = new_price,
-        )
-    df2 = conn_TRI.update(
-        data =new_TRI,
-        )
+    #st.dataframe(new_price.tail())
+    #st.dataframe(new_TRI.tail())
+
+    #df1 = conn_price.update(data = new_price,)
+    df2 = conn_TRI.update(data =new_TRI,)
     
 
     st.toast('update complete')
