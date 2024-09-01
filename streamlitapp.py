@@ -231,8 +231,8 @@ if st.session_state["daily_submitted"]:
 
     if st.button("update daily data"):
         st.session_state["update daily data"] = not st.session_state["update daily data"]
-        df1 = conn_price.update(st.session_state['price'])
-        df2 = conn_TRI.update(st.session_state['tri'])
+        df1 = conn_price.update(new_TRI)
+        df2 = conn_TRI.update(new_price)
         st.toast('update complete')
 
 
