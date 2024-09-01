@@ -205,6 +205,11 @@ st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 st.write(f"Number of ticker {len(symbol_list)}")
 
+if 'price' not in st.session_state:
+    st.session_state['price'] = 'value'
+if 'tri' not in st.session_state:
+    st.session_state['tri'] = 'value'
+
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
@@ -215,24 +220,26 @@ if daily_submitted:
     new_TRI = dl_set50(df_TRI)
 
     new_price = download_pricedata(df_price)
-    st.dataframe(new_price)
-    st.dataframe(new_TRI)
+    st.session_state['price'] = new_price
+    st.session_state['tri'] = new_TRI
+    st.dataframe(st.session_state['price'])
+    st.dataframe(st.session_state['tri'])
     if st.button('update data'):
-        df1 = conn_price.update(data=new_price)
-        df2 = conn_TRI.update(data=new_price)
+        df1 = conn_price.update(st.session_state['price'])
+        df2 = conn_TRI.update(st.session_state['tri'])
 
 
 #trouble shooting
-conn_test = st.connection("test", type=GSheetsConnection)
-df_test = conn_test.read()
-st.dataframe(df_test)
-new = ['6/5/2024', 3, 0]
-df_test.loc[len(df_test)] = new
-st.dataframe(df_test)
-if st.button("Update worksheet"):
-    df = conn_test.update(
-        data=df_test,
-    )
+#conn_test = st.connection("test", type=GSheetsConnection)
+#df_test = conn_test.read()
+#st.dataframe(df_test)
+#new = ['6/5/2024', 3, 0]
+#df_test.loc[len(df_test)] = new
+#st.dataframe(df_test)
+#if st.button("Update worksheet"):
+#    df = conn_test.update(
+#        data=df_test,
+#    )
 
 #separate download
 
