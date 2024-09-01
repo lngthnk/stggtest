@@ -228,7 +228,9 @@ if st.session_state["daily_submitted"]:
 
     st.dataframe(new_price.tail())
     st.dataframe(new_TRI.tail())
-
+    df1 = conn_price.update(data = new_price)
+    df2 = conn_TRI.update(data =new_TRI)
+    st.toast('update complete')
 
 
     if st.button("update daily data"):
