@@ -229,10 +229,12 @@ if st.session_state["daily_submitted"]:
     st.dataframe(new_price.tail())
     st.dataframe(new_TRI.tail())
 
+
+
     if st.button("update daily data"):
         st.session_state["update daily data"] = not st.session_state["update daily data"]
-        df1 = conn_price.update(new_TRI)
-        df2 = conn_TRI.update(new_price)
+        df1 = conn_price.update(data = new_price)
+        df2 = conn_TRI.update(data =new_TRI)
         st.toast('update complete')
 
 
