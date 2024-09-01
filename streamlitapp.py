@@ -188,6 +188,7 @@ df_TRI = conn_TRI.read()
 df_TRI = df_TRI.set_index('DATE')
 TRI_date = df_TRI.index[-1]
 
+compare_TRI = datetime.strptime(TRI_date, '%d/%m/%Y')
 
 conn_list = st.connection("list", type=GSheetsConnection)
 df_list = conn_list.read()
@@ -197,30 +198,32 @@ df_list2 = df_list2.set_axis(list_col, axis = 1)
 symbol_list = df_list2['Symbol'].to_list()
 
 
-price_date = datetime.strptime(price_date, '%Y-%m-%d')
-price_date = price_date.strftime('%d/%m/%Y')
+compare_price = datetime.strptime(price_date, '%Y-%m-%d')
+price_date = compare_price.strftime('%d/%m/%Y')
+
+todaydate = datetime.today()
+
 
 #show last updated date
 st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 st.write(f"Number of ticker {len(symbol_list)}")
 
-if "daily_submitted" not in st.session_state:
-    st.session_state["daily_submitted"] = False
+new_TRI = dl_set50(df_TRI)
 
-if "update daily data" not in st.session_state:
-    st.session_state["update daily data"] = False
+new_price = download_pricedata(df_price)
+
+st.dataframe(new_price.tail())
+st.dataframe(new_TRI.tail())
+
+
 
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
 #with st.form("Daily Download"):
 #    daily_submitted = st.form_submit_button(label = 'Download daily data')
-
-if st.button("daily_submitted"):
-    st.session_state["daily_submitted"] = not st.session_state["daily_submitted"]
-
-if st.session_state["daily_submitted"]:
+if st.button('Daily Update'):
 
     new_TRI = dl_set50(df_TRI)
 
@@ -235,7 +238,7 @@ if st.session_state["daily_submitted"]:
         data =new_TRI,
         )
     
-    
+
     st.toast('update complete')
 
 
