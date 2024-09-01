@@ -213,9 +213,9 @@ if 'tri' not in st.session_state:
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
-with st.form("Daily Download"):
-    daily_submitted = st.form_submit_button(label = 'Download daily data')
-if daily_submitted:
+#with st.form("Daily Download"):
+#    daily_submitted = st.form_submit_button(label = 'Download daily data')
+if st.button('daily_submitted'):
 
     new_TRI = dl_set50(df_TRI)
 
