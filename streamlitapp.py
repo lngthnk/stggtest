@@ -217,7 +217,8 @@ new_TRI = df_TRI.copy()
 new_TRI.loc['1/9/2024'] = new
 #st.dataframe(new_price.tail())
 st.dataframe(new_TRI.tail())
-df2 = conn_TRI.update(data =new_TRI,)
+if st.button('Daily test'):
+    df2 = conn_TRI.update(data =new_TRI,)
 
 
 #button download new price/ data 
