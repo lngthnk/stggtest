@@ -205,28 +205,37 @@ st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 st.write(f"Number of ticker {len(symbol_list)}")
 
-if 'price' not in st.session_state:
-    st.session_state['price'] = 'value'
-if 'tri' not in st.session_state:
-    st.session_state['tri'] = 'value'
+if "daily_submitted" not in st.session_state:
+    st.session_state["daily_submitted"] = False
+
+if "update daily data" not in st.session_state:
+    st.session_state["update daily data"] = False
 
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
 #with st.form("Daily Download"):
 #    daily_submitted = st.form_submit_button(label = 'Download daily data')
-if st.button('daily_submitted'):
+
+if st.button("daily_submitted"):
+    st.session_state["daily_submitted"] = not st.session_state["daily_submitted"]
+
+if st.session_state["daily_submitted"]:
 
     new_TRI = dl_set50(df_TRI)
 
     new_price = download_pricedata(df_price)
-    st.session_state['price'] = new_price
-    st.session_state['tri'] = new_TRI
-    st.dataframe(st.session_state['price'])
-    st.dataframe(st.session_state['tri'])
-    if st.button('update data'):
+
+    st.dataframe(new_price.tail())
+    st.dataframe(new_TRI.tail())
+
+    if st.button("update daily data"):
+        st.session_state["update daily data"] = not st.session_state["update daily data"]
         df1 = conn_price.update(st.session_state['price'])
         df2 = conn_TRI.update(st.session_state['tri'])
+        st.toast('update complete')
+
+
 
 
 #trouble shooting
