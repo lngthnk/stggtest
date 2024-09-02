@@ -221,7 +221,7 @@ if "update daily data" not in st.session_state:
 if st.button('Daily Update'):
     st.session_state["Daily Update"] = not st.session_state["Daily Update"]
     new_TRI = dl_set50(df_TRI)
-
+    st.session_state['TRI'] = new_TRI
     #new_price = download_pricedata(df_price)
 
 
@@ -233,10 +233,10 @@ if st.session_state["Daily Update"]:
     if st.button("update daily data"):
         st.session_state["update daily data"] = not st.session_state["update daily data"]
         #conn_price.update(data = new_price)
-        conn_TRI.update(data =new_TRI)
+        conn_TRI.update(data =st.session_state['TRI'])
         st.toast('update complete')
         st.success('update complete')
-
+        del st.session_state['TRI']
 
 
 #trouble shooting
