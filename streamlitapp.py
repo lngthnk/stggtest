@@ -288,11 +288,17 @@ if st.button('Daily Update'):
 
 '''
 
-st.write(st.secrets['connections']['TRI'])
-
 conn = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn.read()
 
 st.dataframe(df_TRI)
 
 
+new = [3, 0]
+new_TRI = df_TRI.copy()
+new_TRI.loc['1/9/2024'] = new
+#st.dataframe(new_price.tail())
+st.dataframe(new_TRI.tail())
+if st.button('Daily test'):
+    df2 = conn.update(data =new_TRI,)
+    st.success('successfully update')
