@@ -229,14 +229,14 @@ if st.button('Daily Update'):
     st.dataframe(new_TRI.tail())
 
 
-if st.session_state["Daily Update"]:
-    if st.button("update daily data"):
-        st.session_state["update daily data"] = not st.session_state["update daily data"]
-        #conn_price.update(data = new_price)
-        conn_TRI.update(data =st.session_state['TRI'])
-        st.toast('update complete')
-        st.success('update complete')
-        del st.session_state['TRI']
+    if st.session_state["Daily Update"]:
+        if st.button("update daily data"):
+            st.session_state["update daily data"] = not st.session_state["update daily data"]
+            #conn_price.update(data = new_price)
+            conn_TRI.update(data =st.session_state['TRI'])
+            st.toast('update complete')
+            st.success('update complete')
+            del st.session_state['TRI']
 
 
 #trouble shooting
