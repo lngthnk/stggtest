@@ -288,7 +288,7 @@ if st.button('Daily Update'):
 
 '''
 
-st.write(st.secrets['connection']['TRI'])
+st.write(st.secrets['connections']['TRI'])
 
 conn = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn.read()
