@@ -239,6 +239,15 @@ if st.session_state["Daily Update"]:
         #del st.session_state['TRI']
 
 
+st.write(
+    f"""
+    ## Session state:
+    {st.session_state["Daily Update"]=}
+
+    {st.session_state["update daily data"]=}
+    """
+)
+
 #trouble shooting
 #conn_test = st.connection("test", type=GSheetsConnection)
 #df_test = conn_test.read()
