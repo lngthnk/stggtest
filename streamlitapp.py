@@ -17,7 +17,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
-test_A = '''
+
 @st.cache_resource
 def get_driver():
     return webdriver.Chrome(
@@ -190,15 +190,6 @@ df_TRI = df_TRI.set_index('DATE')
 TRI_date = df_TRI.index[-1]
 
 compare_TRI = datetime.strptime(TRI_date, '%d/%m/%Y')
-
-conn_list = st.connection("list", type=GSheetsConnection)
-df_list = conn_list.read()
-list_col = df_list.iloc[0].to_list()
-df_list2 = df_list.iloc[1:].copy()
-df_list2 = df_list2.set_axis(list_col, axis = 1)
-symbol_list = df_list2['Symbol'].to_list()
-
-
 compare_price = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = compare_price.strftime('%d/%m/%Y')
 
@@ -208,47 +199,40 @@ todaydate = datetime.today()
 #show last updated date
 st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
-st.write(f"Number of ticker {len(symbol_list)}")
 
-#new_TRI = dl_set50(df_TRI)
 
-#new_price = download_pricedata(df_price)
-new = [3, 0]
-new_TRI = df_TRI.copy()
-new_TRI.loc['1/9/2024'] = new
-#st.dataframe(new_price.tail())
-st.dataframe(new_TRI.tail())
-if st.button('Daily test'):
-    df2 = conn_TRI.update(data =new_TRI,)
-    st.success('successfully update')
+
 
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
-#with st.form("Daily Download"):
-#    daily_submitted = st.form_submit_button(label = 'Download daily data')
+
+if "Daily Update" not in st.session_state:
+    st.session_state["Daily Update"] = False
+
+if "update daily data" not in st.session_state:
+    st.session_state["update daily data"] = False
+
+
+
 if st.button('Daily Update'):
+    st.session_state["Daily Update"] = not st.session_state["Daily Update"]
+    new_TRI = dl_set50(df_TRI)
 
-    #new_TRI = dl_set50(df_TRI)
-
-    #new_price = download_pricedata(df_price)
-
-    #st.dataframe(new_price.tail())
-    #st.dataframe(new_TRI.tail())
-
-    #df1 = conn_price.update(data = new_price,)
-    conn_TRI.update(data =new_TRI,)
-    
-
-    st.toast('update complete')
+    new_price = download_pricedata(df_price)
 
 
+    st.dataframe(new_price.tail())
+    st.dataframe(new_TRI.tail())
+
+
+if st.session_state["Daily Update"]
     if st.button("update daily data"):
         st.session_state["update daily data"] = not st.session_state["update daily data"]
-        df1 = conn_price.update(data = new_price)
-        df2 = conn_TRI.update(data =new_TRI)
+        conn_price.update(data = new_price)
+        conn_TRI.update(data =new_TRI)
         st.toast('update complete')
-
+        st.success('update complete')
 
 
 
@@ -285,22 +269,3 @@ if st.button('Daily Update'):
     #st.toast('Get data complete', icon = '🎉')
 
 
-
-'''
-
-conn_TRI = st.connection("TRI", type=GSheetsConnection)
-df_TRI = conn_TRI.read()
-
-st.dataframe(df_TRI)
-
-
-new = [3, 0]
-new_TRI = df_TRI.copy()
-new_TRI= new_TRI.set_index('DATE')
-new_TRI.loc['1/9/2024'] = new
-#st.dataframe(new_price.tail())
-st.dataframe(new_TRI.tail())
-new_TRI = new_TRI.reset_index()
-if st.button('Daily test'):
-    df2 = conn_TRI.update(data =new_TRI,)
-    st.success('successfully update')
