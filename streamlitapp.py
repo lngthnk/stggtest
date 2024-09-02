@@ -179,25 +179,28 @@ options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 driver = get_driver()
+'''
 conn_price = st.connection("Price", type=GSheetsConnection)
 df_price = conn_price.read()
 df_price = df_price.set_index('Date')
 price_date = df_price.index[-1]
-
+compare_price = datetime.strptime(price_date, '%Y-%m-%d')
+price_date = compare_price.strftime('%d/%m/%Y')
+'''
 conn_TRI = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn_TRI.read()
 df_TRI = df_TRI.set_index('DATE')
 TRI_date = df_TRI.index[-1]
 
 compare_TRI = datetime.strptime(TRI_date, '%d/%m/%Y')
-compare_price = datetime.strptime(price_date, '%Y-%m-%d')
-price_date = compare_price.strftime('%d/%m/%Y')
+
+
 
 todaydate = datetime.today()
 
 
 #show last updated date
-st.write(f"Last Price Date {price_date}")
+#st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 
 
@@ -219,17 +222,17 @@ if st.button('Daily Update'):
     st.session_state["Daily Update"] = not st.session_state["Daily Update"]
     new_TRI = dl_set50(df_TRI)
 
-    new_price = download_pricedata(df_price)
+    #new_price = download_pricedata(df_price)
 
 
-    st.dataframe(new_price.tail())
+    #st.dataframe(new_price.tail())
     st.dataframe(new_TRI.tail())
 
 
 if st.session_state["Daily Update"]:
     if st.button("update daily data"):
         st.session_state["update daily data"] = not st.session_state["update daily data"]
-        conn_price.update(data = new_price)
+        #conn_price.update(data = new_price)
         conn_TRI.update(data =new_TRI)
         st.toast('update complete')
         st.success('update complete')
