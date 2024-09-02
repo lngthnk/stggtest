@@ -219,7 +219,7 @@ new_TRI.loc['1/9/2024'] = new
 st.dataframe(new_TRI.tail())
 if st.button('Daily test'):
     df2 = conn_TRI.update(data =new_TRI,)
-
+    st.success('successfully update')
 
 #button download new price/ data 
 #daily donwload
@@ -236,7 +236,7 @@ if st.button('Daily Update'):
     #st.dataframe(new_TRI.tail())
 
     #df1 = conn_price.update(data = new_price,)
-    df2 = conn_TRI.update(data =new_TRI,)
+    conn_TRI.update(data =new_TRI,)
     
 
     st.toast('update complete')
