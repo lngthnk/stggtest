@@ -17,6 +17,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
+test_A = '''
 @st.cache_resource
 def get_driver():
     return webdriver.Chrome(
@@ -172,7 +173,7 @@ def select_option(option, tri_df, price_df, ticker_list):
     )
 
     return df
-'''
+
 
 options = Options()
 options.add_argument("--disable-gpu")
@@ -286,8 +287,8 @@ if st.button('Daily Update'):
 
 
 '''
-conn_TRI = st.connection("TRI", type=GSheetsConnection)
-df_TRI = conn_TRI.read()
+conn = st.connection("TRI", type=GSheetsConnection)
+df_TRI = conn.read()
 
 st.dataframe(df_TRI)
 
