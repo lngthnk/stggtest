@@ -172,7 +172,7 @@ def select_option(option, tri_df, price_df, ticker_list):
     )
 
     return df
-
+'''
 
 options = Options()
 options.add_argument("--disable-gpu")
@@ -285,7 +285,10 @@ if st.button('Daily Update'):
 
 
 
+'''
+conn_TRI = st.connection("TRI", type=GSheetsConnection)
+df_TRI = conn_TRI.read()
 
-
+st.dataframe(df_TRI)
 
 
