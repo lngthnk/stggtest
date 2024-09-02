@@ -296,6 +296,7 @@ st.dataframe(df_TRI)
 
 new = [3, 0]
 new_TRI = df_TRI.copy()
+new_TRI= new_TRI.set_index('DATE')
 new_TRI.loc['1/9/2024'] = new
 #st.dataframe(new_price.tail())
 st.dataframe(new_TRI.tail())
