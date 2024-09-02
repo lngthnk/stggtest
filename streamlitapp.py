@@ -288,8 +288,8 @@ if st.button('Daily Update'):
 
 '''
 
-conn = st.connection("TRI", type=GSheetsConnection)
-df_TRI = conn.read()
+conn_TRI = st.connection("TRI", type=GSheetsConnection)
+df_TRI = conn_TRI.read()
 
 st.dataframe(df_TRI)
 
@@ -300,6 +300,7 @@ new_TRI= new_TRI.set_index('DATE')
 new_TRI.loc['1/9/2024'] = new
 #st.dataframe(new_price.tail())
 st.dataframe(new_TRI.tail())
+new_TRI = new_TRI.reset_index()
 if st.button('Daily test'):
-    df2 = conn.update(data =new_TRI,)
+    df2 = conn_TRI.update(data =new_TRI,)
     st.success('successfully update')
