@@ -180,9 +180,9 @@ options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 driver = get_driver()
 
-conn = st.connection("Price", type=GSheetsConnection)
+conn = st.connection("Data", type=GSheetsConnection)
 df_price = conn.read(
-    spreadsheet='SET_MAI_Close',
+    spreadsheet="Port_op_Data",
     worksheet="SET_MAI_Close"
     )
 df_price = df_price.set_index('Date')
@@ -191,8 +191,8 @@ compare_price = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = compare_price.strftime('%d/%m/%Y')
 
 df_TRI = conn.read(
-    spreadsheet='Benchmark',
-    #worksheet="Benchmark"
+    spreadsheet="Port_op_Data",
+    worksheet="Benchmark"
     )
 df_TRI = df_TRI.set_index('DATE')
 TRI_date = df_TRI.index[-1]
@@ -277,3 +277,4 @@ st.write(
     {st.session_state["Button2"]=}
     """
 )
+
