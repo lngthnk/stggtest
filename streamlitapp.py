@@ -179,14 +179,14 @@ options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 driver = get_driver()
-'''
+
 conn_price = st.connection("Price", type=GSheetsConnection)
 df_price = conn_price.read()
 df_price = df_price.set_index('Date')
 price_date = df_price.index[-1]
 compare_price = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = compare_price.strftime('%d/%m/%Y')
-'''
+
 conn_TRI = st.connection("TRI", type=GSheetsConnection)
 df_TRI = conn_TRI.read()
 df_TRI = df_TRI.set_index('DATE')
@@ -200,7 +200,7 @@ todaydate = datetime.today()
 
 
 #show last updated date
-#st.write(f"Last Price Date {price_date}")
+st.write(f"Last Price Date {price_date}")
 st.write(f"Last TRI Date {TRI_date}")
 
 
@@ -241,14 +241,18 @@ if st.button("Button1"):
     st.session_state["Button1"] = not st.session_state["Button1"]
     new_TRI = dl_set50(df_TRI)
 
-    #new_price = download_pricedata(df_price)
+    new_price = download_pricedata(df_price)
 
 
-    #st.dataframe(new_price.tail())
-    st.dataframe(new_TRI.tail())
+    st.dataframe(new_price.tail())
+
+    new_price = new_price.reset_index()
+    st.session_state['price'] = new_price
     new_TRI = new_TRI.reset_index()
     st.session_state['TRI'] = new_TRI
 
+    st.dataframe(st.session_state['price'].tail())
+    st.dataframe(st.session_state['TRI'].tail())
 if st.session_state["Button1"]:
     if st.button("Button2"):
         st.session_state["Button2"] = not st.session_state["Button2"]
