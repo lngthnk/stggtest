@@ -96,6 +96,8 @@ def download_pricedata(old_price_data):
     tic_list = old_price_data.columns.to_list()
     SET_MAI = []
     for ticker in tic_list:
+        if type(ticker) == bool: #in case th stock name is TRUE
+            ticker = str(ticker).upper()
         SET_MAI.append(ticker + ".BK")
     #get lastest date
     lastest_date = old_price_data.index[-1]
