@@ -183,7 +183,7 @@ driver = get_driver()
 conn = st.connection("Price", type=GSheetsConnection)
 df_price = conn.read(
     spreadsheet='SET_MAI_Close',
-    #worksheet="SET_MAI_Close"
+    worksheet="SET_MAI_Close"
     )
 df_price = df_price.set_index('Date')
 price_date = df_price.index[-1]
