@@ -264,8 +264,8 @@ if st.session_state["button1"]:
 st.write(
     f"""
     ## Session state:
-    {st.session_state["Daily Update"]=}
+    {st.session_state["button1"]=}
 
-    {st.session_state["update daily data"]=}
+    {st.session_state["button2"]=}
     """
 )
