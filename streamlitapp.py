@@ -210,43 +210,6 @@ st.write(f"Last TRI Date {TRI_date}")
 #daily donwload
 st.subheader("Daily download")
 
-if "Daily Update" not in st.session_state:
-    st.session_state["Daily Update"] = False
-
-if "update daily data" not in st.session_state:
-    st.session_state["update daily data"] = False
-
-
-
-if st.button('Daily Update'):
-    st.session_state["Daily Update"] = not st.session_state["Daily Update"]
-    new_TRI = dl_set50(df_TRI)
-    st.session_state['TRI'] = new_TRI
-    #new_price = download_pricedata(df_price)
-
-
-    #st.dataframe(new_price.tail())
-    st.dataframe(new_TRI.tail())
-
-
-if st.session_state["Daily Update"]:
-    if st.button("update daily data"):
-        st.session_state["update daily data"] = not st.session_state["update daily data"]
-        #conn_price.update(data = new_price)
-        conn_TRI.update(data =st.session_state['TRI'])
-        st.toast('update complete')
-        st.success('update complete')
-        #del st.session_state['TRI']
-
-
-st.write(
-    f"""
-    ## Session state:
-    {st.session_state["Daily Update"]=}
-
-    {st.session_state["update daily data"]=}
-    """
-)
 
 #trouble shooting
 #conn_test = st.connection("test", type=GSheetsConnection)
@@ -268,16 +231,41 @@ st.write(
 
 
 
+if "button1" not in st.session_state:
+    st.session_state["button1"] = False
+
+if "button2" not in st.session_state:
+    st.session_state["button2"] = False
+
+if st.button("Button1"):
+    st.session_state["button1"] = not st.session_state["button1"]
+
+    st.session_state["Daily Update"] = not st.session_state["Daily Update"]
+    new_TRI = dl_set50(df_TRI)
+
+    #new_price = download_pricedata(df_price)
 
 
+    #st.dataframe(new_price.tail())
+    st.dataframe(new_TRI.tail())
+    new_TRI = new_TRI.reset_index()
+    st.session_state['TRI'] = new_TRI
 
+if st.session_state["button1"]:
+    if st.button("Button2"):
+        st.session_state["button2"] = not st.session_state["button2"]
+        #conn_price.update(data = new_price)
+        conn_TRI.update(data =st.session_state['TRI'])
+        st.toast('update complete')
+        st.success('update complete')
+        #del st.session_state['TRI']
 
-#with st.form("choose"):
-    #option = st.selectbox("What file to download?", ("Price", "TRI", "add new ticker to price"))
-    #submitted = st.form_submit_button(label = 'get data')
+        
+st.write(
+    f"""
+    ## Session state:
+    {st.session_state["Daily Update"]=}
 
-#if submitted:
-    #on_click=select_option(option, tri_df = SET50_data, price_df=price_data, ticker_list=Ticker_list)
-    #st.toast('Get data complete', icon = '🎉')
-
-
+    {st.session_state["update daily data"]=}
+    """
+)
