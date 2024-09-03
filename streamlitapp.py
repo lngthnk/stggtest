@@ -180,15 +180,14 @@ options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 driver = get_driver()
 
-conn_price = st.connection("Price", type=GSheetsConnection)
-df_price = conn_price.read()
+conn = st.connection("Price", type=GSheetsConnection)
+df_price = conn.read(worksheet = "SET_MAI_Close")
 df_price = df_price.set_index('Date')
 price_date = df_price.index[-1]
 compare_price = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = compare_price.strftime('%d/%m/%Y')
 
-conn_TRI = st.connection("TRI", type=GSheetsConnection)
-df_TRI = conn_TRI.read()
+df_TRI = conn.read(worksheet = "Benchmark")
 df_TRI = df_TRI.set_index('DATE')
 TRI_date = df_TRI.index[-1]
 
@@ -257,7 +256,8 @@ if st.session_state["Button1"]:
     if st.button("Button2"):
         st.session_state["Button2"] = not st.session_state["Button2"]
         #conn_price.update(data = new_price)
-        conn_TRI.update(data =st.session_state['TRI'])
+        conn.update(worksheet = "SET_MAI_Close", data =st.session_state['price'])
+        conn.update(worksheet = "Benchmark", data =st.session_state['TRI'])
         st.toast('update complete')
         st.success('update complete')
         #del st.session_state['TRI']
