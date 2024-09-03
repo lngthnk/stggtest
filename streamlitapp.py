@@ -250,9 +250,6 @@ if st.button("Button1"):
 
     new_price = download_pricedata(df_price)
 
-
-    st.dataframe(new_price.tail())
-
     new_price = new_price.reset_index()
     st.session_state['price'] = new_price
     new_TRI = new_TRI.reset_index()
