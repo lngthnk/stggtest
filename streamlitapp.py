@@ -231,14 +231,14 @@ st.subheader("Daily download")
 
 
 
-if "button1" not in st.session_state:
-    st.session_state["button1"] = False
+if "Button1" not in st.session_state:
+    st.session_state["Button1"] = False
 
-if "button2" not in st.session_state:
-    st.session_state["button2"] = False
+if "Button2" not in st.session_state:
+    st.session_state["Button2"] = False
 
 if st.button("Button1"):
-    st.session_state["button1"] = not st.session_state["button1"]
+    st.session_state["Button1"] = not st.session_state["Button1"]
     new_TRI = dl_set50(df_TRI)
 
     #new_price = download_pricedata(df_price)
@@ -249,9 +249,9 @@ if st.button("Button1"):
     new_TRI = new_TRI.reset_index()
     st.session_state['TRI'] = new_TRI
 
-if st.session_state["button1"]:
+if st.session_state["Button1"]:
     if st.button("Button2"):
-        st.session_state["button2"] = not st.session_state["button2"]
+        st.session_state["Button2"] = not st.session_state["Button2"]
         #conn_price.update(data = new_price)
         conn_TRI.update(data =st.session_state['TRI'])
         st.toast('update complete')
@@ -262,8 +262,8 @@ if st.session_state["button1"]:
 st.write(
     f"""
     ## Session state:
-    {st.session_state["button1"]=}
+    {st.session_state["Button1"]=}
 
-    {st.session_state["button2"]=}
+    {st.session_state["Button2"]=}
     """
 )
