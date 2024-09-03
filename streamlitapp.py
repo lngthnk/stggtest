@@ -239,8 +239,6 @@ if "button2" not in st.session_state:
 
 if st.button("Button1"):
     st.session_state["button1"] = not st.session_state["button1"]
-
-    st.session_state["Daily Update"] = not st.session_state["Daily Update"]
     new_TRI = dl_set50(df_TRI)
 
     #new_price = download_pricedata(df_price)
