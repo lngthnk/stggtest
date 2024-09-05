@@ -101,9 +101,7 @@ def download_pricedata(old_price_data):
             old_price_data.rename(columns = {ticker:n_ticker}, inplace = True)
             ticker = n_ticker
         SET_MAI.append(ticker + ".BK")
-    st.write(SET_MAI)
-    pdtest = yf.download(SET_MAI[0:10], start='2022-03-31', end='2024-09-04' )['Close']
-    st.dataframe(pdtest)
+
     #get lastest date
     lastest_date = old_price_data.index[-1]
     lastest_date = datetime.strptime(lastest_date, '%Y-%m-%d')+ timedelta(days = 1)
@@ -281,7 +279,3 @@ st.write(
     {st.session_state["Button2"]=}
     """
 )
-
-if st.button('download price'):
-    new_price = download_pricedata(df_price)
-    st.dataframe(new_price)
