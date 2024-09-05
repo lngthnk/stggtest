@@ -101,6 +101,7 @@ def download_pricedata(old_price_data):
             old_price_data.rename(columns = {ticker:n_ticker}, inplace = True)
             ticker = n_ticker
         SET_MAI.append(ticker + ".BK")
+    st.write(SET_MAI)
     #get lastest date
     lastest_date = old_price_data.index[-1]
     lastest_date = datetime.strptime(lastest_date, '%Y-%m-%d')+ timedelta(days = 1)
