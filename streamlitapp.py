@@ -279,3 +279,6 @@ st.write(
     """
 )
 
+if st.button('download price'):
+    new_price = download_pricedata(df_price)
+    st.dataframe(new_price)
