@@ -219,36 +219,18 @@ st.write(f"Last TRI Date {TRI_date}")
 #button download new price/ data 
 #daily donwload
 st.subheader("Daily download")
-
-
-#trouble shooting
-#conn_test = st.connection("test", type=GSheetsConnection)
-#df_test = conn_test.read()
-#st.dataframe(df_test)
-#new = ['6/5/2024', 3, 0]
-#df_test.loc[len(df_test)] = new
-#st.dataframe(df_test)
-#if st.button("Update worksheet"):
-#    df = conn_test.update(
-#        data=df_test,
-#    )
-
-#separate download
-
-
-
 #update list
 
 
 
-if "Button1" not in st.session_state:
-    st.session_state["Button1"] = False
+if "Daily Download" not in st.session_state:
+    st.session_state["Daily Download"] = False
 
-if "Button2" not in st.session_state:
-    st.session_state["Button2"] = False
+if "Update to drive" not in st.session_state:
+    st.session_state["Update to drive"] = False
 
-if st.button("Button1"):
-    st.session_state["Button1"] = not st.session_state["Button1"]
+if st.button("Daily Download"):
+    st.session_state["Daily Download"] = not st.session_state["Daily Download"]
     new_TRI = dl_set50(df_TRI)
 
     new_price = download_pricedata(df_price)
@@ -260,22 +242,14 @@ if st.button("Button1"):
 
     st.dataframe(st.session_state['price'].tail())
     st.dataframe(st.session_state['TRI'].tail())
-if st.session_state["Button1"]:
-    if st.button("Button2"):
-        st.session_state["Button2"] = not st.session_state["Button2"]
+if st.session_state["Daily Download"]:
+    if st.button("Update to drive"):
+        st.session_state["Update to drive"] = not st.session_state["Update to drive"]
         #conn_price.update(data = new_price)
         conn.update(worksheet = "SET_MAI_Close", data =st.session_state['price'])
         conn.update(worksheet = "Benchmark", data =st.session_state['TRI'])
         st.toast('update complete')
         st.success('update complete')
-        #del st.session_state['TRI']
+
 
         
-st.write(
-    f"""
-    ## Session state:
-    {st.session_state["Button1"]=}
-
-    {st.session_state["Button2"]=}
-    """
-)
