@@ -187,7 +187,8 @@ driver = get_driver()
 
 conn = st.connection("Data", type=GSheetsConnection)
 df_price = conn.read(
-    spreadsheet="Port_op_Data",
+    spreadsheet="Copy of Port_op_Data",
+    #spreadsheet="Port_op_Data",
     worksheet="SET_MAI_Close"
     )
 df_price = df_price.set_index('Date')
@@ -196,7 +197,8 @@ compare_price = datetime.strptime(price_date, '%Y-%m-%d')
 price_date = compare_price.strftime('%d/%m/%Y')
 
 df_TRI = conn.read(
-    spreadsheet="Port_op_Data",
+    spreadsheet="Copy of Port_op_Data",
+    #spreadsheet="Port_op_Data",
     worksheet="Benchmark"
     )
 df_TRI = df_TRI.set_index('DATE')
