@@ -34,12 +34,14 @@ options.add_argument("--headless")
 driver = get_driver()
 
 conn = st.connection("Data", type=GSheetsConnection)
-df_price = conn.read(
+df_target = conn.read(
     spreadsheet="Copy of Port_op_Data",
     #spreadsheet="Port_op_Data",
     worksheet="Target"
     )
+st.dataframe(df_target)
 
+'''
 url = "https://www.settrade.com/th/research/iaa-consensus/main"
 driver.get(url) #open website
 xpath_filter = "/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]/div/div[1]/div/div[3]"
@@ -116,3 +118,4 @@ iaa_df2 = iaa_df[['Ticker', 'Avg']][:25].copy()
 #rename col to date
 #iaa_df2.rename(columns=['Avg'])
 st.dataframe(iaa_df2)
+'''
