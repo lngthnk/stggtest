@@ -20,6 +20,12 @@ from webdriver_manager.core.os_manager import ChromeType
 
 @st.cache_resource
 def get_driver():
+    options = Options()
+    options.add_argument("--disable-gpu")
+    options.add_argument("--headless")
+    options.add_argument("--window-size=1024,768")
+    driver = get_driver()
+
     return webdriver.Chrome(
         service=Service(
             ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
@@ -116,10 +122,13 @@ df_target = conn.read(
     worksheet="Target"
     )
 st.dataframe(df_target)
-'''
+
 options = Options()
 options.add_argument("--disable-gpu")
 options.add_argument("--headless")
+options.add_argument("--window-size=1024,768")
+'''
+
 driver = get_driver()
 
 url = "https://www.settrade.com/th/research/iaa-consensus/main"
