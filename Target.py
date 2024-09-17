@@ -44,6 +44,7 @@ def target_dl():
 
     optionbutton = "/html/body/div[1]/div/div/div[2]/div[2]/div/div[2]/div/div[1]/div/div[3]/div/div/ul/li[43]/button/div"
     cookie_button = "/html/body/div[1]/div/div/div[7]/div/div/div[2]/button"
+    time.sleep(2)
     cookie = driver.find_element(By.XPATH, cookie_button)
     cookie.click()
     dropdown = driver.find_element(By.XPATH, xpath_filter)
@@ -53,12 +54,12 @@ def target_dl():
     option.click()
 
 
-    time.sleep(5)
+    time.sleep(3)
 
     try:
 
         driver.execute_script("window.scrollBy(0, 1500);")
-        time.sleep(5)
+        time.sleep(3)
         #driver.execute_script("window.scrollBy(0, 1500);")
         #time.sleep(5)
     except Exception as e:
@@ -150,7 +151,12 @@ time.sleep(5)
 
 try:
 
-    driver.execute_script("window.scrollBy(0, 1500);")
+
+
+    scroll_to = '//*[@id="__layout"]/div/div[2]/div[2]/div/div[3]/div/div[2]/div[1]/div[2]'
+    element = driver.find_element(By.XPATH, scroll_to)
+    driver.execute_script("arguments[0].scrollIntoView(true);", element)
+    #driver.execute_script("window.scrollBy(0, 1500);")
     time.sleep(5)
     #driver.execute_script("window.scrollBy(0, 1500);")
     #time.sleep(5)
