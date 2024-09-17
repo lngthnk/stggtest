@@ -24,7 +24,7 @@ def get_driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--headless")
     options.add_argument("--window-size=1024,768")
-    driver = get_driver()
+    #driver = get_driver()
 
     return webdriver.Chrome(
         service=Service(
